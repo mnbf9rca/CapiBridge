@@ -1,44 +1,29 @@
-// Template — rendered to config.h by `./render-config.sh` (uses 1Password CLI).
+#pragma once
+#include "settings_defaults.h"
+
+// Template — rendered to config.h by ./render-config.sh (1Password CLI).
 // Secret values reference 1Password items; non-secret tunables stay inline.
 // Never commit the rendered config.h (it contains plaintext secrets).
-
-/////////////////////////// LoRa/ESPNow Gateway Key ///////////////////////////
-
-#define GATEWAY_KEY "{{ op://CapiBridge/config/gateway_key }}" // Keep it small
+//
+// Post-merge note: MQTT, gateway key, and encryption settings are now
+// configured at runtime via the Web UI at http://<CapiBridge-ip>/ — they
+// no longer live in this file.
 
 ///////////////////////////////////////////////////////////////////////////////
+/////////////////////////// ESSENTIAL USER SETTINGS ///////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////// WIFI / MQTT ////////////////////////////////////
+// LoRa hardware — uncomment the line matching your board.
+#define LORA_MODULE LORA_MODULE_SX1276    // Ra-01 433 / Ra-01H 868/915 MHz "SX1276" (CapiBridge v1, orders before Aug 2025)
+//#define LORA_MODULE LORA_MODULE_SX1262    // Ra-01SH 868/915 MHz "SX1262" (CapiBridge v2)
+//#define LORA_MODULE LORA_MODULE_SX1268    // Ra-01S 433 MHz "SX1268" (CapiBridge v2 433 MHz)
+
+#define BAND 433.0                          // 433.0 / 868.0 / 915.0
+
+#define WEBUI_USERNAME "admin"              // Fixed browser login name for the protected Web UI
+#define WEBUI_PASSWORD "{{ op://CapiBridge/config/webui_password }}"  // Empty string disables Web UI password protection
 
 #define WIFI_SSID "{{ op://CapiBridge/config/wifi_ssid }}"
 #define WIFI_PASSWORD "{{ op://CapiBridge/config/wifi_password }}"
-#define MQTT_USERNAME "{{ op://CapiBridge/config/mqtt_username }}"
-#define MQTT_PASSWORD "{{ op://CapiBridge/config/mqtt_password }}"
-#define MQTT_SERVER "{{ op://CapiBridge/config/mqtt_server }}"
-#define MQTT_PORT {{ op://CapiBridge/config/mqtt_port }}
-
-///////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////// LORA CONFIG ////////////////////////////////////
-
-// For sending 6 bytes "6 characters" of data using different Spreading Factors (SF), the estimated time on air (ToA)
-// for each SF is as follows:
-
-// SF7: Approximately 0.027 seconds (27.494 milliseconds)
-// SF8: Approximately 0.052 seconds (52.224 milliseconds)
-// SF9: Approximately 0.100 seconds (100.147 milliseconds)
-// SF10: Approximately 0.193 seconds (193.413 milliseconds)
-// SF11: Approximately 0.385 seconds (385.297 milliseconds)
-// SF12: Approximately 0.746 seconds (746.127 milliseconds)
-// These calculations demonstrate how the time on air increases with higher Spreading Factors
-// due to the decreased data rate, which is a trade-off for increased communication range and signal robustness.
-
-#define SIGNAL_BANDWITH 125E3  // signal bandwidth in Hz, defaults to 125E3
-#define SPREADING_FACTOR 8    // ranges from 6-12,default 7 see API docs
-#define CODING_RATE 5          // Supported values are between 5 and 8, these correspond to coding rates of 4/5 and 4/8. The coding rate numerator is fixed at 4.
-#define SYNC_WORD 0xF3         // byte value to use as the sync word, defaults to 0x12
-#define PREAMBLE_LENGTH 6      // Supported values are between 6 and 65535.
-#define TX_POWER 20            // TX power in dB, defaults to 17, Supported values are 2 to 20
-#define BAND 433E6             // 433E6 / 868E6 / 915E6
 
 ///////////////////////////////////////////////////////////////////////////////
