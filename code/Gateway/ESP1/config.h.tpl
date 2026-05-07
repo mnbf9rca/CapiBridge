@@ -18,7 +18,7 @@
 //#define LORA_MODULE LORA_MODULE_SX1262    // Ra-01SH 868/915 MHz "SX1262" (CapiBridge v2)
 //#define LORA_MODULE LORA_MODULE_SX1268    // Ra-01S 433 MHz "SX1268" (CapiBridge v2 433 MHz)
 
-#define BAND 433.0                          // 433.0 / 868.0 / 915.0
+#define BAND 868.0                          // 433.0 / 868.0 / 915.0
 
 #define WEBUI_USERNAME "admin"              // Fixed browser login name for the protected Web UI
 #define WEBUI_PASSWORD "{{ op://CapiBridge/config/webui_password }}"  // Empty string disables Web UI password protection
