@@ -26,3 +26,8 @@
 #define WIFI_PASSWORD "Hatest086852A"
 
 //////////////////////////////////////////////////////////////////////////////
+// Optional local overrides (git-ignored). Create config.local.h next to this file and use
+// #undef / #define to replace any value above without editing tracked files.
+#if __has_include("config.local.h")
+#include "config.local.h"
+#endif

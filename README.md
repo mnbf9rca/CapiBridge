@@ -126,6 +126,13 @@ ____________
 > [!NOTE]
 > For `ESP1.ino`
 > Initial configurations are done in the file `config.h` and the rest in WebUI.
+> To keep your values out of `config.h` (and out of git), create `config.local.h` next to it. It is loaded automatically if it exists, for example:
+> ```cpp
+> #undef LORA_MODULE
+> #define LORA_MODULE LORA_MODULE_SX1276
+> #undef WIFI_SSID
+> #define WIFI_SSID "MyNetwork"
+> ```
 
 
 #### Initial Configuration

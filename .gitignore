@@ -1,0 +1,2 @@
+# Per-user build overrides for config.h; may contain passwords.
+code/Gateway/*/config.local.h
